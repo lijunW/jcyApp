@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision Assistant - Technical Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.9;
+            text-decoration: underline;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: white;
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 900px;
+        }
+        
+        .hero i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .cta-button:hover {
+            background: white;
+            color: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .support-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 3rem 0;
+        }
+        
+        .support-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .support-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .support-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .support-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .faq-section {
+            margin: 4rem 0;
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--dark);
+            padding: 10px 0;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            padding: 15px 0 5px;
+            color: #555;
+            line-height: 1.7;
+            display: none;
+        }
+        
+        .contact-section {
+            margin: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3rem;
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .contact-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-section p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .contact-option {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 250px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .contact-option i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: var(--success);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .faq-section, .contact-section {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>Decision Assistant</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-user"></i> Account</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <i class="fas fa-headset"></i>
+        <h2>We're Here to Help</h2>
+        <p>Find solutions to common issues, get answers to your questions, or contact our support team for personalized assistance.</p>
+        <a href="#contact" class="cta-button">Contact Support</a>
+    </section>
+
+    <!-- Support Options -->
+    <section class="container support-section">
+        <div class="support-card">
+            <i class="fas fa-book"></i>
+            <h3>Knowledge Base</h3>
+            <p>Browse our comprehensive guides and tutorials to get the most out of Decision Assistant.</p>
+        </div>
+        
+        <div class="support-card">
+            <i class="fas fa-video"></i>
+            <h3>Video Tutorials</h3>
+            <p>Watch step-by-step video guides to master all features of our decision-making tools.</p>
+        </div>
+        
+        <div class="support-card">
+            <i class="fas fa-comments"></i>
+            <h3>Community Forum</h3>
+            <p>Connect with other users, share experiences, and get advice from decision-making experts.</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="container faq-section">
+        <h2>Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                How do I reset my password?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                no account need to regist
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                Can I use Decision Assistant on multiple devices?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Yes, you can access your Decision Assistant account from any device with our web app. Your data syncs automatically across all devices. For mobile users, we recommend downloading our iOS and Android apps from their respective app stores.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                How do I export my decision data?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                To export your data, go to Settings > Data Management > Export Data. You can choose to export individual decision projects or your entire decision history. Data is exported in CSV format which can be opened in Excel, Google Sheets, or any spreadsheet software.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                Why isn't the achievement system updating?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Achievements update after you complete a decision and mark it as resolved. If you're not seeing achievements update, make sure you've completed at least one decision project with multiple options analyzed. If problems persist, try refreshing the app or contact our support team.
+            </div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                How secure is my decision data?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                We prioritize your data security with bank-level encryption both in transit and at rest. All sensitive data is encrypted using AES-256, and we undergo regular security audits. You maintain full ownership of your decision data, and we never share it with third parties without your consent.
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container contact-section">
+        <h2>Contact Our Support Team</h2>
+        <p>Can't find what you're looking for? Our support specialists are ready to help with any questions or issues.</p>
+        
+        <div class="contact-options">
+            <div class="contact-option">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Support</h3>
+                <p>support@decisionassistant.com</p>
+                <p>cument32@gmail.com</p>
+                <p>Response within 24 hours</p>
+            </div>
+            
+            <div class="contact-option">
+                <i class="fas fa-comment-alt"></i>
+                <h3>Live Chat</h3>
+                <p>Available Mon-Fri</p>
+                <p>9:00 AM - 6:00 PM (GMT)</p>
+            </div>
+            
+            <div class="contact-option">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Phone Support</h3>
+                <p>+86 189 5873 2445</p>
+                <p>Mon-Fri, 8am-5pm EST</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Decision Assistant</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Features</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorial Videos</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Decision Assistant. All rights reserved. Decision Assistant is a trademark of DA Solutions Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ accordion functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    answer.style.display = 'block';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
